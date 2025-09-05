@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   # Routes for the Listing resource:
+  get("/", { :controller => "boards", :action => "index" })
 
   # CREATE
   post("/insert_listing", { :controller => "listings", :action => "create" })
