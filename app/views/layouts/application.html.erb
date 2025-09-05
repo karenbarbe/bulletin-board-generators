@@ -39,7 +39,19 @@
     </header>
 
     <main>
-      <div class="container-two-thirds"><%= yield %></div>
+
+      <div class="container-two-thirds">
+
+        <div class="text-sucess">
+          <%= notice %>
+        </div>
+        <div class="text-danger">
+          <%= alert %>
+        </div>
+
+        <%= yield %>
+      </div>
+
     </main>
     <footer>
     </footer>
