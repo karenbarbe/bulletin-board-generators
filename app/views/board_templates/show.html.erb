@@ -37,25 +37,45 @@
 
 <article>
   <header>
-    <h2>
-      Edit board
-    </h2>
+
+      Add a new listing
+
   </header>
 
-  <form action="/modify_board/<%= @the_board.id %>"  method="post" >
-    <div>
-      <label for="name_box">
-        Name
+  <form action="/insert_listing" method="post">
+
+      <label for="title_box">
+        Title
       </label>
 
-      <input type="text" id="name_box" name="query_name" value="<%= @the_board.name %>">
-    </div>
+      <input type="text" id="title_box" name="query_title">
+
+
+
+      <label for="body_box">
+        Body
+      </label>
+
+    <textarea name="query_body" id="body_box"></textarea>
+
+      <label for="expires_on_box">
+        Expires on
+      </label>
+
+      <input type="date" id="expires_on_box" name="query_expires_on">
+
+
+
+
+      <input type="hidden" id="board_id_box" name="query_board_id" value="<%= @the_board.id %>">
 
     <button type="submit">
-      Update board
+      Create listing
     </button>
   </form>
 </article>
+
+
 
 <article>
   <header>
