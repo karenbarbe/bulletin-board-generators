@@ -1,46 +1,38 @@
-<h1>
-  Board #<%= @the_board.id %> details
-</h1>
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><%= @the_board.name %></li>
+  </ul>
+</nav>
 
-<%= @the_board.listings %>
+<% active_listings = @the_board.listings.where({ :expires_on => (Date.today...) }) %>
+<% expired_listings = @the_board.listings.where({ :expires_on => (...Date.today) }) %>
+
 
 <article>
-  <div>
-    <a href="/boards">
-      Go back
-    </a>
+  <header>
+    Active listings
+  </header>
+  <div class="overflow-auto">
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Expires on</th>
+        <th>Posted on</th>
+      </thead>
+      <% active_listings.each do |listing| %>
+        <tr>
+          <td><%= listing.title %></td>
+          <td><%= listing.body %></td>
+          <td><%= listing.expires_on.strftime("%b %e, %Y") %></td>
+          <td><%= listing.created_at.strftime("%b %e, %Y") %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
-
-  <div>
-    <a href="/delete_board/<%= @the_board.id %>">
-      Delete board
-    </a>
-  </div>
-  <dl>
-    <dt>
-      Name
-    </dt>
-    <dd>
-      <%= @the_board.name %>
-    </dd>
-
-    <dt>
-      Created at
-    </dt>
-    <dd>
-      <%= time_ago_in_words(@the_board.created_at) %> ago
-    </dd>
-
-    <dt>
-      Updated at
-    </dt>
-    <dd>
-      <%= time_ago_in_words(@the_board.updated_at) %> ago
-    </dd>
-  </dl>
 </article>
 
-<hr>
 
 
 <article>
@@ -65,4 +57,26 @@
   </form>
 </article>
 
-<hr>
+<article>
+  <header>
+    Expired listings
+  </header>
+  <div class="overflow-auto">
+    <table>
+      <thead>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Expired on</th>
+        <th>Posted on</th>
+      </thead>
+      <% expired_listings.each do |listing| %>
+        <tr>
+          <td><%= listing.title %></td>
+          <td><%= listing.body %></td>
+          <td><%= listing.expires_on.strftime("%b %e, %Y") %></td>
+          <td><%= listing.created_at.strftime("%b %e, %Y") %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</article>
